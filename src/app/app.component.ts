@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Album } from './component/album/album.component';
-import { DeezerService } from './services/deezer.service';
+import { DeezerService, SearchResult } from './services/deezer.service';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,11 @@ export class AppComponent implements OnInit {
   onAlbumClick(event: boolean) {
     console.log(event);
   }
-
-  ngOnInit(): void {
-    this.deezer.search('h').subscribe((data) => {
-      let id = data[5].id;
-      this.deezer.track(id).subscribe((track) => {
-        this.album = track;
-      });
+  requestTrack(track: SearchResult) {
+    this.deezer.track(track.id).subscribe((album) => {
+      this.album = album;
     });
   }
+
+  ngOnInit(): void {}
 }
