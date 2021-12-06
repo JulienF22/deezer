@@ -1,0 +1,20 @@
+<div
+  style="display: flex; padding: 20px"
+  *ngIf="data"
+  [ngStyle]="{ 'background-color': 'hsl(' + data.duration + ', 50%, 50%)' }"
+  (click)="albumClick.emit(myPicture)"
+>
+  <img
+    [src]="myPicture"
+    (mouseenter)="myPicture = data.artist.picture"
+    (mouseleave)="myPicture = data.album.cover"
+    (mouseover)="mouseover($event)"
+  />
+  <div style="padding-left: 30px">
+    <h1>{{ data.title }}</h1>
+    <h2>{{ data.artist.name }}</h2>
+    <h2>{{ data.date | date: "mediumDate" }}</h2>
+    <button class="btn btn-secondary">test</button>
+    <button mat-button color="accent">Accent</button>
+  </div>
+</div>
